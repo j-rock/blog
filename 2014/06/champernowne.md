@@ -38,11 +38,13 @@ As far as I understand, the List monad bind operation looks like:
 The idea is that we take a list and a function that maps list elements to new lists. Then we apply that function over each list element and concatenate each of the new lists produced. To illustrate:
 
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
-> f x :: Num a => a -> [a]
-> f x = [x + 1, x * 2]
-> 
+> -- A list of numbers
 > xs :: Num a => [a]
 > xs = [1, 3, 5]
+>
+> -- A function that takes a number and returns a list of new numbers
+> f x :: Num a => a -> [a]
+> f x = [x + 1, x * 2]
 > 
 > xs >>= f = concat $ map f xs
 >          = concat $ [f 1, f 3, f 5]
@@ -63,7 +65,7 @@ Treat the constant as an infinite string: the concatenation of all the "stringif
 > --remember, Strings are just [Char]
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Wait a minute, that looks strikingly similar to the strucutre of the List bind crap. And here comes the magic:
+Wait a minute, that looks strikingly similar to the structure of the List bind crap. And here comes the magic:
 
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
 > champernowne = [0..] >>= show
