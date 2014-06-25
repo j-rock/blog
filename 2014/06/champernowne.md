@@ -21,18 +21,18 @@ As far as I understand, the List monad bind operation looks like:
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
 > (>>=) :: [a] -> (a -> [b]) -> [b]
 > (>>=) = flip concatMap
-> 
-> -- or
+>
+> -- which is effectively:
 > xs >>= f = concatMap f xs
-> 
-> -- or
+>
+> -- I personally like separating concatMap out
+> xs >>= f = concat $ map f xs
+>
+> -- How about some unnecessary point-free crap?
 > (>>=) = (concat .) . flip map
 >
-> -- or
+> -- How about a list comprehension?
 > xs >>= f = [x' | x <- xs, x' <- f x]
-> 
-> -- or, my personal favorite (in terms of clarity)
-> xs >>= f = concat $ map f xs
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The idea is that we take a list and a function that maps list elements to new lists. Then we apply that function over each list element and concatenate each of the new lists produced. To illustrate:
