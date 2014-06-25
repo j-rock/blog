@@ -68,6 +68,15 @@ Treat the constant as an infinite string: the concatenation of all the "stringif
 Wait a minute, that looks strikingly similar to the structure of the List bind crap. And here comes the magic:
 
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
+> -- Infinite list of natural numbers
+> xs :: Num a => [a]
+> xs = [0..]
+>
+> -- A function that produces a list of characters
+> f :: Show a => a -> [Char]
+> f = show 
+>
+> champernowne = xs >>= f
 > champernowne = [0..] >>= show
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
