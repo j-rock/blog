@@ -19,10 +19,10 @@ I ain't a category theorist but I don't gotta be one. Haskell's sweet:
 * Pretty syntax
 
 ##Statement of infinite wisdom
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
-import Control.Monad (forever)
-
-main = forever $ putStrLn "joeyrulz" 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
+> import Control.Monad (forever)
+> 
+> main = forever $ putStrLn "joeyrulz" 
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #### June 24, 2014
