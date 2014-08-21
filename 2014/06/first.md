@@ -21,8 +21,8 @@ I ain't a category theorist but I don't gotta be one. Haskell's sweet:
 ##Statement of infinite wisdom
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
 > import Control.Monad (forever)
-> 
-> main = forever $ putStrLn "joeyrulz" 
+>
+> main = forever $ putStrLn "joeyrulz"
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #### June 24, 2014

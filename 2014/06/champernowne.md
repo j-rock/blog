@@ -45,7 +45,7 @@ The idea is that we take a list and a function that maps list elements to new li
 > -- A function that takes a number and returns a list of new numbers
 > f x :: Num a => a -> [a]
 > f x = [x + 1, x * 2]
-> 
+>
 > xs >>= f = concat $ map f xs
 >          = concat $ [f 1, f 3, f 5]
 >          = concat $ [[1 + 1, 1 * 2], [3 + 1, 3 * 2], [5 + 1, 5 * 2]]
@@ -74,7 +74,7 @@ Wait a minute, that looks strikingly similar to the structure of the List bind c
 >
 > -- A function that produces a list of characters
 > f :: Show a => a -> [Char]
-> f = show 
+> f = show
 >
 > champernowne = xs >>= f
 > champernowne = [0..] >>= show
@@ -89,9 +89,9 @@ After the fun List monad revelation, the actual problem is a little dull. We nee
 > --our indices are [1, 10, ..., 1000000]
 > indices = take 7 $ iterate (*10) 1
 > indexC = (!!) champernowne
-> 
+>
 > problem40 = product $ map (digit2Int . indexC) indices
-> 
+>
 > --how about an uglier version?
 > problem40' = product $ map (digit2Int . (!!) ([0..] >>= show)) $ take 7 $ iterate (*10) 1
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
