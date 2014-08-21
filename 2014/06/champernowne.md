@@ -1,4 +1,4 @@
-#Champernowne's constant (Project Euler #40 spoiler)
+﻿#Champernowne's constant (Project Euler #40 spoiler)
 
 ##Project Euler gets hacked
 So, recently Project Euler got hacked and they took down the website. Subsequently they put the problems back up (but not user accounts). I chose to do a [random problem](http://projecteuler.net/problem=40) on the first page.
@@ -59,15 +59,18 @@ For this problem, we don't care about the fractional representation of the const
 Treat the constant as an infinite string: the concatenation of all the "stringified" natural numbers:
 
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
+> -- Bear in mind, a String = [Char]
 > champernowne = "01234567891011..."
-> champernowne = "0" ++ "1" ++ ... ++ "10" ++ "11" ++ ...
-> champernowne = ['0'] ++ ['1'] ++ ... ++ ['1', '0'] ++ ['1', '1'] ++ ...
-> --remember, Strings are just [Char]
+>              = "0" ++ "1" ++ ... ++ "10" ++ "11" ++ ...
+>              = concat $ ["0", "1", ..., "10", "11", ...]
+>              = concat $ map f [0..]
+>              = [0..] >>= f
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Wait a minute, that looks strikingly similar to the structure of the List bind crap. And here comes the magic:
+Holy crap: the List monad found its way in here. How are we going to get that function f, though? It has a type signature like:
 
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
+<<<<<<< HEAD
 > -- Infinite list of natural numbers
 > xs :: Num a => [a]
 > xs = [0..]
@@ -77,6 +80,16 @@ Wait a minute, that looks strikingly similar to the structure of the List bind c
 > f = show
 >
 > champernowne = xs >>= f
+=======
+> f :: Int -> String
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Oh, that's not so bad. The prelude gives us that:
+
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
+> show :: Show a -> a -> String
+> f = show 
+>>>>>>> 8af2d375e682aeb00304f1412ff2577a5e89d631
 > champernowne = [0..] >>= show
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
