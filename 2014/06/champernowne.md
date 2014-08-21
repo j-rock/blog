@@ -70,37 +70,28 @@ Treat the constant as an infinite string: the concatenation of all the "stringif
 Holy crap: the List monad found its way in here. How are we going to get that function f, though? It has a type signature like:
 
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
-<<<<<<< HEAD
-> -- Infinite list of natural numbers
-> xs :: Num a => [a]
-> xs = [0..]
->
-> -- A function that produces a list of characters
-> f :: Show a => a -> [Char]
-> f = show
->
-> champernowne = xs >>= f
-=======
 > f :: Int -> String
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Oh, that's not so bad. The prelude gives us that:
 
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
-> show :: Show a -> a -> String
-> f = show 
->>>>>>> 8af2d375e682aeb00304f1412ff2577a5e89d631
+> show :: Show a => a -> String
 > champernowne = [0..] >>= show
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After the fun List monad revelation, the actual problem is a little dull. We need to index the constant at a bunch of places and take the product.
 
 > ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
-> --we need a way to get a number from the character
+> -- digitToInt :: Char -> Int
 > import Data.Char (digitToInt)
+>
+> champernowne = [0..] >== show
 >
 > --our indices are [1, 10, ..., 1000000]
 > indices = take 7 $ iterate (*10) 1
+>
+> -- indexC indexes into the Champernowne String
 > indexC = (!!) champernowne
 >
 > problem40 = product $ map (digit2Int . indexC) indices
